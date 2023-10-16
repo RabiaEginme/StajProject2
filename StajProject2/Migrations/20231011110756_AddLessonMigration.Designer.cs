@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StajProject2.Data;
 
@@ -10,9 +11,11 @@ using StajProject2.Data;
 namespace StajProject2.Migrations
 {
     [DbContext(typeof(SchoolContext))]
-    partial class SchoolContextModelSnapshot : ModelSnapshot
+    [Migration("20231011110756_AddLessonMigration")]
+    partial class AddLessonMigration
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -111,8 +114,8 @@ namespace StajProject2.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("SchoolId")
-                        .HasColumnType("int");
+                    b.Property<string>("SchoolId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Section")
                         .HasColumnType("nvarchar(max)");

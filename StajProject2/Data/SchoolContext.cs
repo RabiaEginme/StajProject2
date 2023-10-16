@@ -3,7 +3,7 @@ using Microsoft.Extensions.Hosting;
 using System.Reflection.Emit;
 using StajProject2.Entities;
 using Microsoft.EntityFrameworkCore;
-
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace StajProject2.Data
 {
@@ -16,6 +16,7 @@ namespace StajProject2.Data
         public DbSet<Student> Students { get; set; }
 
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Lesson> Lessons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,17 +24,15 @@ namespace StajProject2.Data
                         .HasMany(s => s.Addresses)
                         .WithOne(c => c.Student)
                         .HasForeignKey(c => c.StudentId);
-            //modelBuilder.Entity<Student>()
-            //            .HasMany(a => a.Lessons)
-            //            .WithMany(b => b.Students);
-                            
-
-
+            modelBuilder.Entity<Student>()
+                        .HasMany(a => a.Lessons)
+                        .WithMany(b => b.Students);
+                        
+          
             base.OnModelCreating(modelBuilder);
         }
 
         
-
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -41,5 +40,7 @@ namespace StajProject2.Data
             base.OnConfiguring(optionsBuilder);
         }
 
+       
+        
     }
 } 
