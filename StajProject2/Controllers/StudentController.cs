@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using StajProject2.DAL;
 using StajProject2.Data;
 using StajProject2.Dtos;
 using StajProject2.Entities;
@@ -13,6 +14,19 @@ namespace StajProject2.Controllers
     {
         private readonly SchoolContext _schoolContext;
         private readonly IMapper _mapper;
+
+
+        //repository
+
+        public IStudentRepository studentRepository;
+
+        public StudentController()
+        {
+            this.studentRepository = new StudentRepository(new SchoolContext());
+        }
+
+
+
         public StudentController(SchoolContext context, IMapper mapper)
         {
             _schoolContext = context;
@@ -23,12 +37,16 @@ namespace StajProject2.Controllers
         public IEnumerable<Student> Get()
         {
             return _schoolContext.Students;
+
         }
+
+
         [HttpGet("{id}")]
         public Student Get(int id)
         {
             return _schoolContext.Students.Where(k => k.Id == id ).FirstOrDefault();
         }
+
 
         //POST api/<StudentController>
 
