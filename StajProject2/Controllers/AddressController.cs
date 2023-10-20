@@ -24,7 +24,7 @@ namespace StajProject2.Controllers
         {
             return _schoolContext.Addresses.Where(k => k.Id == id).FirstOrDefault();
         }
-        //POST api/<StudentController>
+        //POST api/<Adress Controller>
 
         [HttpPost]
         public void Post([FromBody] Address value)
@@ -37,16 +37,16 @@ namespace StajProject2.Controllers
         [HttpPut("id")]
         public void Put(int id, [FromBody] Address value)
         {
-            var _address = _schoolContext.Addresses.FirstOrDefault(x => x.Id == id);
-            if (_address == null)
+            var address = _schoolContext.Addresses.FirstOrDefault(x => x.Id == id);
+            if (address == null)
             {
-                _address.Street = value.Street;
-                _address.District= value.District;
-                _address.CityId= value.CityId;
-                _address.CountryId= value.CountryId;
-                _address.StudentId= value.StudentId;
+                address.Street = value.Street;
+                address.District= value.District;
+                address.CityId= value.CityId;
+                address.CountryId= value.CountryId;
+                address.StudentId= value.StudentId;
 
-                _schoolContext.Addresses.Update(_address);
+                _schoolContext.Addresses.Update(address);
                 _schoolContext.SaveChanges();
 
             }
@@ -56,8 +56,8 @@ namespace StajProject2.Controllers
         [HttpDelete("{id}")]
         public void Delete(int id)
         {
-            var _address = _schoolContext.Addresses.FirstOrDefault(k => k.Id == id);
-            _schoolContext.Addresses.Remove(_address);
+            var address = _schoolContext.Addresses.FirstOrDefault(k => k.Id == id);
+            _schoolContext.Addresses.Remove(address);
             _schoolContext.SaveChanges();
         }
     }

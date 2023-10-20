@@ -21,7 +21,7 @@ namespace StajProject2.DAL
 
         public Student GetStudentByID(int id)
         {
-            return context.Students.Find(id);
+            return context.Students.First(x => x.Id == id);
         }
 
         public void InsertStudent(Student student)
@@ -29,9 +29,9 @@ namespace StajProject2.DAL
             context.Students.Add(student);
         }
 
-        public void DeleteStudent(int studentID)
+        public void DeleteStudent(int studentId)
         {
-            Student student = context.Students.Find(studentID);
+            Student student = context.Students.Find(studentId);
             context.Students.Remove(student);
         }
 
@@ -63,6 +63,11 @@ namespace StajProject2.DAL
         {
             Dispose(true);
             GC.SuppressFinalize(this);
+        }
+
+        public void SaveChanges()
+        {
+            throw new NotImplementedException();
         }
     }
 }
