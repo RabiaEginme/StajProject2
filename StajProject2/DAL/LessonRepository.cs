@@ -28,8 +28,22 @@ namespace StajProject2.DAL
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            Dispose(true);
+            GC.SuppressFinalize(true);  // Violates rule
         }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+                if (context != null)
+                {
+                    context.Dispose();
+                    context = null;
+                }
+            }
+        }
+
 
         public void DeleteLesson(int lessonId)
         {
@@ -42,7 +56,7 @@ namespace StajProject2.DAL
         }
         public void Save()
         {
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
         
 

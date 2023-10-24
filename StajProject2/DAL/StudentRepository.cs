@@ -42,7 +42,7 @@ namespace StajProject2.DAL
 
         public void Save()
         {
-            context.SaveChanges();
+            context.SaveChangesAsync();
         }
 
         private bool disposed = false;
